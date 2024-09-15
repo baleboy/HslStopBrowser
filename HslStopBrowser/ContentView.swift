@@ -36,10 +36,12 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         withViewportAnimation(.easeIn(duration: 0.5)) {
-                            viewport = .followPuck(
-                                zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
+                            isCameraFollowingUser.toggle()
+                            if (isCameraFollowingUser) {
+                                viewport = .followPuck(
+                                    zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
+                            }
                         }
-                        isCameraFollowingUser = true
                     }) {
                         Image(systemName: isCameraFollowingUser ? "location.fill" : "location")
                             .foregroundColor(isCameraFollowingUser ? .blue : .gray)
@@ -48,7 +50,6 @@ struct ContentView: View {
                             .clipShape(Circle())
                             .shadow(radius: 4)
                     }
-                    .disabled(isCameraFollowingUser)
                     .padding()
                 }
             }
