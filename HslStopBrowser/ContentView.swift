@@ -9,6 +9,7 @@ struct ContentView: View {
     @State private var viewport: Viewport = .idle
     @StateObject private var departuresViewModel = DeparturesViewModel()
     @State private var isSheetPresented = false
+    @State private var isCameraFollowingUser = false
     
     var body: some View {
         ZStack {
@@ -23,10 +24,38 @@ struct ContentView: View {
             }
             .mapStyle(.hslTransitMapStyle)
             .ornamentOptions(OrnamentOptions(compass: CompassViewOptions(visibility: .visible)))
+            .onMapIdle { _ in
+                isCameraFollowingUser = false
+            }
             .ignoresSafeArea()
+            
+            // Location tracking button
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        withViewportAnimation(.easeIn(duration: 0.5)) {
+                            viewport = .followPuck(
+                                zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
+                        }
+                        isCameraFollowingUser = true
+                    }) {
+                        Image(systemName: "location.fill")
+                            .foregroundColor(isCameraFollowingUser ? .gray : .blue)
+                            .padding()
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 4)
+                    }
+                    .disabled(isCameraFollowingUser)
+                    .padding()
+                }
+            }
         }
         .onAppear() {
             viewport = .followPuck(zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
+            isCameraFollowingUser = true
         }
         .sheet(isPresented: $isSheetPresented) {
             DeparturesSheet(stop: selectedStop, departures: departuresViewModel.departures)
@@ -36,17 +65,17 @@ struct ContentView: View {
     }
     
     private func handleTransitStopSelection(feature: InteractiveFeature, context: InteractionContext) {
-            if case .string(let stopName) = feature.properties?["stop_name"] as? Turf.JSONValue,
-               case .string(let stopId) = feature.properties?["stop_id"] as? Turf.JSONValue {
-                let newStop = TransitStop(id: stopId, coordinate: context.coordinate, name: stopName)
-                selectedStop = newStop
-                isSheetPresented = true
-                departuresViewModel.fetchDepartures(for: stopId)
-                print("Selected transit stop: \(stopName)")
-            } else {
-                print("Tapped a stop, but couldn't get the name or ID")
-            }
+        if case .string(let stopName) = feature.properties?["stop_name"] as? Turf.JSONValue,
+           case .string(let stopId) = feature.properties?["stop_id"] as? Turf.JSONValue {
+            let newStop = TransitStop(id: stopId, coordinate: context.coordinate, name: stopName)
+            selectedStop = newStop
+            isSheetPresented = true
+            departuresViewModel.fetchDepartures(for: stopId)
+            print("Selected transit stop: \(stopName)")
+        } else {
+            print("Tapped a stop, but couldn't get the name or ID")
         }
+    }
 }
 
 struct TransitStop: Identifiable {
