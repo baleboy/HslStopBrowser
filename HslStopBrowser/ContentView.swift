@@ -41,8 +41,8 @@ struct ContentView: View {
                         }
                         isCameraFollowingUser = true
                     }) {
-                        Image(systemName: "location.fill")
-                            .foregroundColor(isCameraFollowingUser ? .gray : .blue)
+                        Image(systemName: isCameraFollowingUser ? "location.fill" : "location")
+                            .foregroundColor(isCameraFollowingUser ? .blue : .gray)
                             .padding()
                             .background(Color.white)
                             .clipShape(Circle())
