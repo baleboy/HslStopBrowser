@@ -1,14 +1,14 @@
 import SwiftUI
 @_spi(Experimental) import MapboxMaps
 
-let initialZoom: Double = 14.4
+let initialZoom: Double = 16
 let defaultPitch: Double = 30
 
 struct ContentView: View {
     @State private var selectedStop: TransitStop?
-    @State private var viewport: Viewport = .followPuck(zoom: initialZoom, bearing: .constant(0))
-    @State private var isDrawerOpen = false
-        @StateObject private var departuresViewModel = DeparturesViewModel()
+    @State private var viewport: Viewport = .followPuck(zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
+    @StateObject private var departuresViewModel = DeparturesViewModel()
+    @State private var isSheetPresented = false
     
     var body: some View {
         ZStack {
@@ -23,8 +23,11 @@ struct ContentView: View {
             }
             .mapStyle(.hslTransitMapStyle)
             .ignoresSafeArea()
-            
-            StopDrawer(isOpen: $isDrawerOpen, stop: selectedStop, departures: departuresViewModel.departures)
+        }
+        .sheet(isPresented: $isSheetPresented) {
+            DeparturesSheet(stop: selectedStop, departures: departuresViewModel.departures)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
         }
     }
     
@@ -33,7 +36,7 @@ struct ContentView: View {
                case .string(let stopId) = feature.properties?["stop_id"] as? Turf.JSONValue {
                 let newStop = TransitStop(id: stopId, coordinate: context.coordinate, name: stopName)
                 selectedStop = newStop
-                isDrawerOpen = true
+                isSheetPresented = true
                 departuresViewModel.fetchDepartures(for: stopId)
                 print("Selected transit stop: \(stopName)")
             } else {
