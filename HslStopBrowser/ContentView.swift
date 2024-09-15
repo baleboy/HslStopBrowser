@@ -35,12 +35,8 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        withViewportAnimation(.easeIn(duration: 0.5)) {
-                            isCameraFollowingUser.toggle()
-                            if (isCameraFollowingUser) {
-                                viewport = .followPuck(
-                                    zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
-                            }
+                        if (!isCameraFollowingUser) {
+                            followUser()
                         }
                     }) {
                         Image(systemName: isCameraFollowingUser ? "location.fill" : "location")
@@ -55,8 +51,7 @@ struct ContentView: View {
             }
         }
         .onAppear() {
-            viewport = .followPuck(zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
-            isCameraFollowingUser = true
+            followUser()
         }
         .sheet(isPresented: $isSheetPresented) {
             DeparturesSheet(stop: selectedStop, departures: departuresViewModel.departures)
@@ -75,6 +70,14 @@ struct ContentView: View {
             print("Selected transit stop: \(stopName)")
         } else {
             print("Tapped a stop, but couldn't get the name or ID")
+        }
+    }
+    
+    private func followUser() {
+        isCameraFollowingUser = true
+        withViewportAnimation(.easeIn(duration: 0.5)) {
+        viewport = .followPuck(
+            zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
         }
     }
 }
