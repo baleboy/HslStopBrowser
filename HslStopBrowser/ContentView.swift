@@ -6,7 +6,7 @@ let defaultPitch: Double = 30
 
 struct ContentView: View {
     @State private var selectedStop: TransitStop?
-    @State private var viewport: Viewport = .followPuck(zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
+    @State private var viewport: Viewport = .idle
     @StateObject private var departuresViewModel = DeparturesViewModel()
     @State private var isSheetPresented = false
     
@@ -22,7 +22,11 @@ struct ContentView: View {
                 }
             }
             .mapStyle(.hslTransitMapStyle)
+            .ornamentOptions(OrnamentOptions(compass: CompassViewOptions(visibility: .visible)))
             .ignoresSafeArea()
+        }
+        .onAppear() {
+            viewport = .followPuck(zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
         }
         .sheet(isPresented: $isSheetPresented) {
             DeparturesSheet(stop: selectedStop, departures: departuresViewModel.departures)
