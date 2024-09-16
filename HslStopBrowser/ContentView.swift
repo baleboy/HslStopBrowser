@@ -9,7 +9,6 @@ struct ContentView: View {
     @State private var viewport: Viewport = .idle
     @StateObject private var departuresViewModel = DeparturesViewModel()
     @State private var isSheetPresented = false
-    @State private var isCameraFollowingUser = false
     
     var body: some View {
         ZStack {
@@ -21,12 +20,15 @@ struct ContentView: View {
                     handleTransitStopSelection(feature: feature, context: context)
                     return true
                 }
+                
+                if let selectedStop {
+                    MapViewAnnotation(coordinate: selectedStop.coordinate) {
+                        Color.red.frame(width: 20, height: 20)
+                    }
+                }
             }
             .mapStyle(.hslTransitMapStyle)
             .ornamentOptions(OrnamentOptions(compass: CompassViewOptions(visibility: .visible)))
-            .onMapIdle { _ in
-                isCameraFollowingUser = false
-            }
             .ignoresSafeArea()
             
             // Location tracking button
@@ -62,6 +64,10 @@ struct ContentView: View {
         }
     }
     
+    private var isCameraFollowingUser: Bool {
+        return viewport.followPuck != nil
+    }
+    
     private func handleTransitStopSelection(feature: InteractiveFeature, context: InteractionContext) {
         if case .string(let stopName) = feature.properties?["stop_name"] as? Turf.JSONValue,
            case .string(let stopId) = feature.properties?["stop_id"] as? Turf.JSONValue {
@@ -76,7 +82,6 @@ struct ContentView: View {
     }
     
     private func followUser() {
-        isCameraFollowingUser = true
         withViewportAnimation(.easeIn(duration: 0.4)) {
         viewport = .followPuck(
             zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
@@ -84,7 +89,7 @@ struct ContentView: View {
     }
     
     private func unfollowUser() {
-        isCameraFollowingUser = false
+        viewport = .idle
     }
 
 }
