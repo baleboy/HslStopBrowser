@@ -37,6 +37,8 @@ struct ContentView: View {
                     Button(action: {
                         if (!isCameraFollowingUser) {
                             followUser()
+                        } else {
+                            unfollowUser()
                         }
                     }) {
                         Image(systemName: isCameraFollowingUser ? "location.fill" : "location")
@@ -75,11 +77,16 @@ struct ContentView: View {
     
     private func followUser() {
         isCameraFollowingUser = true
-        withViewportAnimation(.easeIn(duration: 0.5)) {
+        withViewportAnimation(.easeIn(duration: 0.4)) {
         viewport = .followPuck(
             zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
         }
     }
+    
+    private func unfollowUser() {
+        isCameraFollowingUser = false
+    }
+
 }
 
 struct TransitStop: Identifiable {
