@@ -15,6 +15,7 @@
 		25BC20342C9699D5003EFDA8 /* DigitransitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC20332C9699D5003EFDA8 /* DigitransitAPI.swift */; };
 		25BC20362C96A3FC003EFDA8 /* DeparturesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC20352C96A3FC003EFDA8 /* DeparturesViewModel.swift */; };
 		25BC20382C96D138003EFDA8 /* DeparturesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC20372C96D138003EFDA8 /* DeparturesSheet.swift */; };
+		25BC203C2C99819B003EFDA8 /* LocationFollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC203B2C99819B003EFDA8 /* LocationFollowButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		25BC20332C9699D5003EFDA8 /* DigitransitAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitransitAPI.swift; sourceTree = "<group>"; };
 		25BC20352C96A3FC003EFDA8 /* DeparturesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesViewModel.swift; sourceTree = "<group>"; };
 		25BC20372C96D138003EFDA8 /* DeparturesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesSheet.swift; sourceTree = "<group>"; };
+		25BC203B2C99819B003EFDA8 /* LocationFollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFollowButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				25BC20332C9699D5003EFDA8 /* DigitransitAPI.swift */,
 				25BC20352C96A3FC003EFDA8 /* DeparturesViewModel.swift */,
 				25BC20372C96D138003EFDA8 /* DeparturesSheet.swift */,
+				25BC203B2C99819B003EFDA8 /* LocationFollowButton.swift */,
 			);
 			path = HslStopBrowser;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				25BC20382C96D138003EFDA8 /* DeparturesSheet.swift in Sources */,
 				25BC20222C9411AE003EFDA8 /* ContentView.swift in Sources */,
 				25BC20202C9411AE003EFDA8 /* HslStopBrowserApp.swift in Sources */,
+				25BC203C2C99819B003EFDA8 /* LocationFollowButton.swift in Sources */,
 				25BC20362C96A3FC003EFDA8 /* DeparturesViewModel.swift in Sources */,
 				25BC20342C9699D5003EFDA8 /* DigitransitAPI.swift in Sources */,
 			);
@@ -377,7 +381,7 @@
 			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
 			requirement = {
 				kind = exactVersion;
-				version = "11.7.0-beta.1";
+				version = "11.7.0-rc.1";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -11,48 +11,29 @@ struct ContentView: View {
     @State private var isSheetPresented = false
     
     var body: some View {
-        ZStack {
-            Map(viewport: $viewport) {
-                
-                Puck2D(bearing: .heading)
-                
-                TapInteraction(.layer("hsl-stops")) { feature, context in
-                    handleTransitStopSelection(feature: feature, context: context)
-                    return true
-                }
-                
-                if let selectedStop {
-                    MapViewAnnotation(coordinate: selectedStop.coordinate) {
-                        Color.red.frame(width: 20, height: 20)
-                    }
-                }
-            }
-            .mapStyle(.hslTransitMapStyle)
-            .ornamentOptions(OrnamentOptions(compass: CompassViewOptions(visibility: .visible)))
-            .ignoresSafeArea()
+        Map(viewport: $viewport) {
             
-            // Location tracking button
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        if (!isCameraFollowingUser) {
-                            followUser()
-                        } else {
-                            unfollowUser()
-                        }
-                    }) {
-                        Image(systemName: isCameraFollowingUser ? "location.fill" : "location")
-                            .foregroundColor(isCameraFollowingUser ? .blue : .gray)
-                            .padding()
-                            .background(Color.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 4)
-                    }
-                    .padding()
-                }
+            Puck2D(bearing: .heading)
+            
+            TapInteraction(.layer("hsl-stops")) { feature, context in
+                handleTransitStopSelection(feature: feature, context: context)
+                return true
             }
+        }
+        .mapStyle(.hslTransitMapStyle)
+        .ornamentOptions(OrnamentOptions(compass: CompassViewOptions(visibility: .visible)))
+        .ignoresSafeArea()
+        .overlay(alignment: .bottomTrailing) {
+            LocationFollowButton(
+                isCameraFollowingUser: isCameraFollowingUser,
+                action: {
+                    if (!isCameraFollowingUser) {
+                        followUser()
+                    } else {
+                        unfollowUser()
+                    }
+                }
+            )
         }
         .onAppear() {
             followUser()
@@ -71,11 +52,14 @@ struct ContentView: View {
     private func handleTransitStopSelection(feature: InteractiveFeature, context: InteractionContext) {
         if case .string(let stopName) = feature.properties?["stop_name"] as? Turf.JSONValue,
            case .string(let stopId) = feature.properties?["stop_id"] as? Turf.JSONValue {
-            let newStop = TransitStop(id: stopId, coordinate: context.coordinate, name: stopName)
-            selectedStop = newStop
-            isSheetPresented = true
-            departuresViewModel.fetchDepartures(for: stopId)
-            print("Selected transit stop: \(stopName)")
+            if let coordinate = feature.geometry.point?.coordinates {
+                let newStop = TransitStop(id: stopId, coordinate: coordinate, name: stopName)
+                selectedStop = newStop
+                isSheetPresented = true
+                departuresViewModel.fetchDepartures(for: stopId)
+                print("Selected transit stop: \(stopName)")
+            }
+
         } else {
             print("Tapped a stop, but couldn't get the name or ID")
         }
