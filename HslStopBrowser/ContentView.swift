@@ -25,15 +25,13 @@ struct ContentView: View {
         .ignoresSafeArea()
         .overlay(alignment: .bottomTrailing) {
             LocationFollowButton(
-                isCameraFollowingUser: isCameraFollowingUser,
-                action: {
-                    if (!isCameraFollowingUser) {
-                        followUser()
-                    } else {
-                        unfollowUser()
-                    }
+                isCameraFollowingUser: isCameraFollowingUser) {
+                if (!isCameraFollowingUser) {
+                    followUser()
+                } else {
+                    unfollowUser()
                 }
-            )
+            }
         }
         .onAppear() {
             followUser()
