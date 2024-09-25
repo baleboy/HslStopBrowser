@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		25827E132CA11C2200BAC798 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25827E122CA11C2200BAC798 /* Assets.xcassets */; };
+		25827E152CA3DBC100BAC798 /* TransitStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25827E142CA3DBB800BAC798 /* TransitStop.swift */; };
 		25BC20202C9411AE003EFDA8 /* HslStopBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC201F2C9411AE003EFDA8 /* HslStopBrowserApp.swift */; };
 		25BC20222C9411AE003EFDA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC20212C9411AE003EFDA8 /* ContentView.swift */; };
 		25BC20272C9411AF003EFDA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25BC20262C9411AF003EFDA8 /* Preview Assets.xcassets */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		25827E122CA11C2200BAC798 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = HslStopBrowser/Assets.xcassets; sourceTree = "<group>"; };
+		25827E142CA3DBB800BAC798 /* TransitStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitStop.swift; sourceTree = "<group>"; };
 		25BC201C2C9411AE003EFDA8 /* HslStopBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HslStopBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25BC201F2C9411AE003EFDA8 /* HslStopBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HslStopBrowserApp.swift; sourceTree = "<group>"; };
 		25BC20212C9411AE003EFDA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 		25BC201E2C9411AE003EFDA8 /* HslStopBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				25827E142CA3DBB800BAC798 /* TransitStop.swift */,
 				25BC20302C941247003EFDA8 /* Info.plist */,
 				25BC201F2C9411AE003EFDA8 /* HslStopBrowserApp.swift */,
 				25BC20212C9411AE003EFDA8 /* ContentView.swift */,
@@ -161,6 +164,7 @@
 			files = (
 				25BC20382C96D138003EFDA8 /* DeparturesSheet.swift in Sources */,
 				25BC20222C9411AE003EFDA8 /* ContentView.swift in Sources */,
+				25827E152CA3DBC100BAC798 /* TransitStop.swift in Sources */,
 				25BC20202C9411AE003EFDA8 /* HslStopBrowserApp.swift in Sources */,
 				25BC203C2C99819B003EFDA8 /* LocationFollowButton.swift in Sources */,
 				25BC20362C96A3FC003EFDA8 /* DeparturesViewModel.swift in Sources */,

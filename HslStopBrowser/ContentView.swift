@@ -78,12 +78,6 @@ struct ContentView: View {
 
 }
 
-struct TransitStop: Identifiable {
-    let id: String
-    let coordinate: CLLocationCoordinate2D
-    let name: String
-}
-
 extension MapStyle {
     static let hslTransitMapStyle = MapStyle(uri: StyleURI(rawValue: "mapbox://styles/baleboy/cm10be3wu01d601o3e49ncww4")!)
 }
