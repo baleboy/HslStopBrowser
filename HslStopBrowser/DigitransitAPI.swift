@@ -46,7 +46,8 @@ class DigitransitAPI {
             return json.data.stop.stoptimesWithoutPatterns.map { stoptime in
                 Departure(id: UUID().uuidString,
                           route: stoptime.trip.routeShortName,
-                          scheduledDeparture: stoptime.serviceDay + stoptime.scheduledDeparture)
+                          scheduledDeparture: stoptime.serviceDay + stoptime.scheduledDeparture,
+                          headsign: stoptime.headsign)
             }
         } catch {
             throw APIError.networkError
@@ -71,6 +72,7 @@ struct Stoptime: Codable {
     let scheduledDeparture: Int
     let serviceDay: Int
     let trip: Trip
+    let headsign: String
 }
 
 struct Trip: Codable {

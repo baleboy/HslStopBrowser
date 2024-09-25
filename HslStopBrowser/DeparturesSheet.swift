@@ -28,6 +28,9 @@ struct DeparturesSheet: View {
                             HStack {
                                 Text(departure.route)
                                     .font(.headline)
+                                Text(departure.headsign)
+                                    .font(.caption)
+                                    .opacity(0.7)
                                 Spacer()
                                 Text(formatDepartureTime(departure.scheduledDeparture))
                                     .font(.subheadline)
@@ -55,9 +58,11 @@ struct DeparturesSheet: View {
 #Preview {
     let sampleStop = TransitStop(id: "HSL:1020124", coordinate: CLLocationCoordinate2D(latitude: 60.1699, longitude: 24.9384), name: "Helsinki Central Railway Station")
     let sampleDepartures = [
-        Departure(id: "1", route: "550", scheduledDeparture: Int(Date().timeIntervalSince1970) + 300),
-        Departure(id: "2", route: "560", scheduledDeparture: Int(Date().timeIntervalSince1970) + 600),
-        Departure(id: "3", route: "570", scheduledDeparture: Int(Date().timeIntervalSince1970) + 900)
+        Departure(id: "1", route: "550", scheduledDeparture: Int(Date().timeIntervalSince1970) + 300, headsign: "headsign 1"),
+        
+        Departure(id: "2", route: "560", scheduledDeparture: Int(Date().timeIntervalSince1970) + 600, headsign: "headsign 2"),
+        Departure(id: "3", route: "570", scheduledDeparture: Int(Date().timeIntervalSince1970) + 900,
+                  headsign: "headsign 3")
     ]
 
     return DeparturesSheet(stop: sampleStop, departures: sampleDepartures)

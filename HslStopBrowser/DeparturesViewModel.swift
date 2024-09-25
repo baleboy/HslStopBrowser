@@ -33,5 +33,6 @@ struct Departure: Identifiable {
     let id: String
     let route: String
     let scheduledDeparture: Int
+    let headsign: String
 }
 

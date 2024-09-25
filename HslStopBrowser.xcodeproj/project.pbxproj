@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25827E132CA11C2200BAC798 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25827E122CA11C2200BAC798 /* Assets.xcassets */; };
 		25BC20202C9411AE003EFDA8 /* HslStopBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC201F2C9411AE003EFDA8 /* HslStopBrowserApp.swift */; };
 		25BC20222C9411AE003EFDA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC20212C9411AE003EFDA8 /* ContentView.swift */; };
-		25BC20242C9411AF003EFDA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25BC20232C9411AF003EFDA8 /* Assets.xcassets */; };
 		25BC20272C9411AF003EFDA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25BC20262C9411AF003EFDA8 /* Preview Assets.xcassets */; };
 		25BC202F2C9411DB003EFDA8 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 25BC202E2C9411DB003EFDA8 /* MapboxMaps */; };
 		25BC20342C9699D5003EFDA8 /* DigitransitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC20332C9699D5003EFDA8 /* DigitransitAPI.swift */; };
@@ -19,10 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		25827E122CA11C2200BAC798 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = HslStopBrowser/Assets.xcassets; sourceTree = "<group>"; };
 		25BC201C2C9411AE003EFDA8 /* HslStopBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HslStopBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25BC201F2C9411AE003EFDA8 /* HslStopBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HslStopBrowserApp.swift; sourceTree = "<group>"; };
 		25BC20212C9411AE003EFDA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		25BC20232C9411AF003EFDA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25BC20262C9411AF003EFDA8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		25BC20302C941247003EFDA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		25BC20332C9699D5003EFDA8 /* DigitransitAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitransitAPI.swift; sourceTree = "<group>"; };
@@ -46,6 +46,7 @@
 		25BC20132C9411AE003EFDA8 = {
 			isa = PBXGroup;
 			children = (
+				25827E122CA11C2200BAC798 /* Assets.xcassets */,
 				25BC201E2C9411AE003EFDA8 /* HslStopBrowser */,
 				25BC201D2C9411AE003EFDA8 /* Products */,
 			);
@@ -65,7 +66,6 @@
 				25BC20302C941247003EFDA8 /* Info.plist */,
 				25BC201F2C9411AE003EFDA8 /* HslStopBrowserApp.swift */,
 				25BC20212C9411AE003EFDA8 /* ContentView.swift */,
-				25BC20232C9411AF003EFDA8 /* Assets.xcassets */,
 				25BC20252C9411AF003EFDA8 /* Preview Content */,
 				25BC20332C9699D5003EFDA8 /* DigitransitAPI.swift */,
 				25BC20352C96A3FC003EFDA8 /* DeparturesViewModel.swift */,
@@ -147,8 +147,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25827E132CA11C2200BAC798 /* Assets.xcassets in Resources */,
 				25BC20272C9411AF003EFDA8 /* Preview Assets.xcassets in Resources */,
-				25BC20242C9411AF003EFDA8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

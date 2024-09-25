@@ -14,7 +14,9 @@ struct ContentView: View {
         Map(viewport: $viewport) {
             
             Puck2D(bearing: .heading)
-            
+                .topImage(UIImage(named: "puck"))
+                .bearingImage(nil)
+
             TapInteraction(.layer("hsl-stops")) { feature, context in
                 handleTransitStopSelection(feature: feature, context: context)
                 return true
