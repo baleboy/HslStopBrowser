@@ -9,6 +9,8 @@ struct ContentView: View {
     @State private var viewport: Viewport = .idle
     @StateObject private var departuresViewModel = DeparturesViewModel()
     @State private var isSheetPresented = false
+    @State private var favoriteStops: Set<String> = Set()
+    @StateObject private var favoritesManager = FavoritesManager()
     
     var body: some View {
         Map(viewport: $viewport) {
@@ -16,7 +18,7 @@ struct ContentView: View {
             Puck2D(bearing: .heading)
                 .topImage(UIImage(named: "puck"))
                 .bearingImage(nil)
-
+            
             TapInteraction(.layer("hsl-stops")) { feature, context in
                 handleTransitStopSelection(feature: feature, context: context)
                 return true
@@ -28,20 +30,27 @@ struct ContentView: View {
         .overlay(alignment: .bottomTrailing) {
             LocationFollowButton(
                 isCameraFollowingUser: isCameraFollowingUser) {
-                if (!isCameraFollowingUser) {
-                    followUser()
-                } else {
-                    unfollowUser()
+                    if (!isCameraFollowingUser) {
+                        followUser()
+                    } else {
+                        unfollowUser()
+                    }
                 }
-            }
         }
         .onAppear() {
             followUser()
         }
         .sheet(isPresented: $isSheetPresented) {
-            DeparturesSheet(stop: selectedStop, departures: departuresViewModel.departures)
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
+            if let stop = selectedStop {
+                            DeparturesSheet(
+                                stop: stop,
+                                departures: departuresViewModel.departures,
+                                isFavorite: favoritesManager.isFavorite(stop.id),
+                                onFavoriteToggle: { favoritesManager.toggleFavorite(for: stop.id) }
+                            )
+                            .presentationDetents([.medium, .large])
+                            .presentationDragIndicator(.visible)
+                        }
         }
     }
     
@@ -59,7 +68,7 @@ struct ContentView: View {
                 departuresViewModel.fetchDepartures(for: stopId)
                 print("Selected transit stop: \(stopName)")
             }
-
+            
         } else {
             print("Tapped a stop, but couldn't get the name or ID")
         }
@@ -67,15 +76,14 @@ struct ContentView: View {
     
     private func followUser() {
         withViewportAnimation(.easeIn(duration: 0.4)) {
-        viewport = .followPuck(
-            zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
+            viewport = .followPuck(
+                zoom: initialZoom, bearing: .constant(0), pitch: defaultPitch)
         }
     }
     
     private func unfollowUser() {
         viewport = .idle
     }
-
 }
 
 extension MapStyle {
