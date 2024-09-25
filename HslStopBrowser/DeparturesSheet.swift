@@ -42,8 +42,6 @@ struct DeparturesSheet: View {
                         .padding()
                 }
             }
-            .navigationTitle("Departures")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
