@@ -389,7 +389,7 @@
 			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
 			requirement = {
 				kind = exactVersion;
-				version = "11.7.0-rc.1";
+				version = 11.7.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
